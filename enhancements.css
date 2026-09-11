@@ -96,6 +96,8 @@
   box-shadow: 0 10px 36px rgba(47, 42, 37, .14);
 }
 
+.dish-dialog-image[hidden] { display: none; }
+
 .dish-dialog-order-button {
   margin-top: 20px;
   min-height: 52px;
