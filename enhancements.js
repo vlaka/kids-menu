@@ -2,6 +2,8 @@ const topOrderButton = document.getElementById('topOrderButton');
 const topOrderCount = document.getElementById('topOrderCount');
 const headerHomeButton = document.getElementById('homeButton');
 const themeInputs = [...document.querySelectorAll('input[name="theme"]')];
+const dishPopup = document.getElementById('dishDialog');
+const dishPopupOrderButton = document.getElementById('dishDialogOrderButton');
 const THEME_KEY = 'kidsMenuTheme';
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -16,6 +18,20 @@ function syncHeaderBackButton() {
   if (!headerHomeButton) return;
   const onHome = typeof activeCategory !== 'undefined' ? activeCategory === 'home' : true;
   headerHomeButton.classList.toggle('back-button', !onHome);
+}
+
+function syncDishPopupOrderButton() {
+  if (!dishPopupOrderButton) return;
+  const dishId = history.state?.dialog;
+  if (!dishId) {
+    dishPopupOrderButton.hidden = true;
+    return;
+  }
+
+  dishPopupOrderButton.hidden = false;
+  const inOrder = typeof orderIds !== 'undefined' && orderIds.has(dishId);
+  dishPopupOrderButton.textContent = inOrder ? 'Убрать из моего заказа' : 'Добавить в заказ';
+  dishPopupOrderButton.classList.toggle('remove', inOrder);
 }
 
 function getSavedTheme() {
@@ -49,8 +65,25 @@ if (headerHomeButton) {
     if (typeof activeCategory === 'undefined' || activeCategory === 'home') return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    if (typeof selectCategory === 'function') selectCategory('home', { replace: true });
+    if (typeof selectCategory === 'function') {
+      selectCategory('home', { replace: true });
+    }
   }, true);
+}
+
+if (dishPopupOrderButton) {
+  dishPopupOrderButton.addEventListener('click', event => {
+    event.stopPropagation();
+    const dishId = history.state?.dialog;
+    if (!dishId || typeof toggleOrder !== 'function') return;
+    toggleOrder(dishId);
+    syncDishPopupOrderButton();
+  });
+}
+
+if (dishPopup) {
+  const popupObserver = new MutationObserver(syncDishPopupOrderButton);
+  popupObserver.observe(dishPopup, { attributes: true, attributeFilter: ['open'] });
 }
 
 for (const input of themeInputs) {
@@ -66,16 +99,19 @@ systemTheme.addEventListener('change', () => {
 const orderObserver = new MutationObserver(() => {
   syncTopOrderCount();
   syncHeaderBackButton();
+  syncDishPopupOrderButton();
 });
 orderObserver.observe(document.getElementById('categoryNav'), { childList: true, subtree: true, characterData: true });
 window.addEventListener('load', async () => {
   syncTopOrderCount();
   syncHeaderBackButton();
+  syncDishPopupOrderButton();
   if ('serviceWorker' in navigator) {
-    try { await navigator.serviceWorker.register('service-worker.js?v=29', { updateViaCache: 'none' }); } catch (error) { console.error(error); }
+    try { await navigator.serviceWorker.register('service-worker.js?v=30', { updateViaCache: 'none' }); } catch (error) { console.error(error); }
   }
 });
 
 applyTheme(getSavedTheme());
 syncTopOrderCount();
 syncHeaderBackButton();
+syncDishPopupOrderButton();
