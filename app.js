@@ -1,6 +1,10 @@
 const menuEl = document.getElementById('menu');
 const statusEl = document.getElementById('status');
 const refreshButton = document.getElementById('refreshButton');
+const settingsButton = document.getElementById('settingsButton');
+const settingsDialog = document.getElementById('settingsDialog');
+const closeSettingsButton = document.getElementById('closeSettingsButton');
+const lastUpdatedEl = document.getElementById('lastUpdated');
 const categoryNav = document.getElementById('categoryNav');
 const categoryTemplate = document.getElementById('categoryTemplate');
 const dishTemplate = document.getElementById('dishTemplate');
@@ -56,6 +60,8 @@ function renderMenu(data) {
 
     menuEl.appendChild(categoryNode);
   }
+
+  lastUpdatedEl.textContent = `Последнее обновление: ${data.updatedAt ?? 'неизвестно'}`;
 }
 
 async function loadMenu({ force = false } = {}) {
@@ -72,17 +78,25 @@ async function loadMenu({ force = false } = {}) {
 
     const data = await response.json();
     renderMenu(data);
-    const updated = data.updatedAt ? ` Обновлено: ${data.updatedAt}.` : '';
-    setStatus(`Меню загружено.${updated}`);
+    setStatus('');
   } catch (error) {
     console.error(error);
-    setStatus('Не удалось загрузить меню. Проверь интернет и нажми «Обновить».');
+    setStatus('Не удалось загрузить меню. Открой настройки и попробуй обновить ещё раз.');
   } finally {
     refreshButton.disabled = false;
   }
 }
 
-refreshButton.addEventListener('click', () => loadMenu({ force: true }));
+settingsButton.addEventListener('click', () => settingsDialog.showModal());
+closeSettingsButton.addEventListener('click', () => settingsDialog.close());
+settingsDialog.addEventListener('click', event => {
+  const rect = settingsDialog.getBoundingClientRect();
+  const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+  if (outside) settingsDialog.close();
+});
+refreshButton.addEventListener('click', async () => {
+  await loadMenu({ force: true });
+});
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
