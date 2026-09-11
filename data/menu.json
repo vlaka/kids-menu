@@ -1,6 +1,6 @@
 {
-  "updatedAt": "12.09.2026 01:16",
-  "menuVersion": "1.0.9",
+  "updatedAt": "12.09.2026 01:18",
+  "menuVersion": "1.0.10",
   "categories": [
     {
       "id": "soups",
@@ -27,19 +27,19 @@
       "name": "Гарниры и макароны",
       "icon": "🍝",
       "items": [
+        {"id":"white-rice","name":"Белый рис","description":"Белый рис.","image":""},
         {"id":"buckwheat","group":"buckwheat","name":"Гречка — обычная","description":"Гречка без добавок.","image":""},
         {"id":"buckwheat-cherry","group":"buckwheat","name":"Гречка — с помидорами черри","description":"Гречка с помидорами черри.","image":""},
-        {"id":"white-rice","name":"Белый рис","description":"Белый рис.","image":""},
+        {"id":"mashed-potatoes","name":"Картофельное пюре","description":"Картофельное пюре.","image":""},
         {"id":"couscous","group":"couscous","name":"Кускус — обычный","description":"Кускус без добавок.","image":""},
         {"id":"couscous-cherry","group":"couscous","name":"Кускус — с помидорами черри","description":"Кускус с помидорами черри.","image":""},
+        {"id":"spiral-pasta","name":"Макароны-пружинки","description":"Макароны-пружинки.","image":""},
+        {"id":"tube-pasta","name":"Макароны-трубочки","description":"Макароны-трубочки.","image":""},
+        {"id":"mashed-potatoes-kids","name":"Пюре «с детками»","description":"Картофельное пюре с кусочками сосисок.","image":""},
         {"id":"spaghetti-plain","group":"spaghetti","name":"Спагетти — без добавок","description":"Спагетти без добавок.","image":""},
         {"id":"spaghetti-cheese","group":"spaghetti","name":"Спагетти — с тёртым сыром","description":"Спагетти с тёртым сыром.","image":""},
         {"id":"spaghetti-cream","group":"spaghetti","name":"Спагетти — со сливками","description":"Спагетти со сливками.","image":""},
-        {"id":"spaghetti-cream-cheese","group":"spaghetti","name":"Спагетти — со сливками и тёртым сыром","description":"Спагетти со сливками и тёртым сыром.","image":""},
-        {"id":"spiral-pasta","name":"Макароны-пружинки","description":"Макароны-пружинки.","image":""},
-        {"id":"tube-pasta","name":"Макароны-трубочки","description":"Макароны-трубочки.","image":""},
-        {"id":"mashed-potatoes","name":"Картофельное пюре","description":"Картофельное пюре.","image":""},
-        {"id":"mashed-potatoes-kids","name":"Пюре «с детками»","description":"Картофельное пюре с кусочками сосисок.","image":""}
+        {"id":"spaghetti-cream-cheese","group":"spaghetti","name":"Спагетти — со сливками и тёртым сыром","description":"Спагетти со сливками и тёртым сыром.","image":""}
       ]
     },
     {
@@ -47,9 +47,9 @@
       "name": "Мясные блюда",
       "icon": "🍖",
       "items": [
-        {"id":"meat","name":"Мяско","description":"Мяско.","image":""},
-        {"id":"chicken","name":"Курица","description":"Курица.","image":""},
         {"id":"sausage","name":"Колбаска","description":"Колбаска.","image":""},
+        {"id":"chicken","name":"Курица","description":"Курица.","image":""},
+        {"id":"meat","name":"Мяско","description":"Мяско.","image":""},
         {"id":"russian-sausage","name":"Русская колбаска","description":"Русская колбаска.","image":""}
       ]
     },
@@ -74,9 +74,9 @@
       "icon": "🍔",
       "items": [
         {"id":"hamburger","name":"Гамбургер","description":"Гамбургер.","image":""},
-        {"id":"hot-dog","name":"Хот-дог","description":"Хот-дог.","image":""},
+        {"id":"fried-potatoes","name":"Жареная картошка / чипсы","description":"Жареная картошка или чипсы.","image":""},
         {"id":"pizza","name":"Пицца","description":"Пицца.","image":""},
-        {"id":"fried-potatoes","name":"Жареная картошка / чипсы","description":"Жареная картошка или чипсы.","image":""}
+        {"id":"hot-dog","name":"Хот-дог","description":"Хот-дог.","image":""}
       ]
     },
     {
@@ -85,19 +85,19 @@
       "icon": "🥪",
       "items": [
         {"id":"white-bread","name":"Белый хлеб","description":"Белый хлеб.","image":""},
-        {"id":"black-bread","name":"Чёрный хлеб","description":"Чёрный хлеб.","image":"assets/dishes/black-bread-20260912-0115.avif"},
-        {"id":"pita","name":"Пита","description":"Пита.","image":""},
         {"id":"bun","name":"Булочка","description":"Булочка.","image":""},
-        {"id":"pita-tomatoes","name":"Пита с помидорами","description":"Пита с помидорами.","image":""},
         {"id":"gvina-levana-sandwich","name":"Бутерброд с гвиной леваной","description":"Бутерброд с гвиной леваной.","image":""},
-        {"id":"toast-plain","group":"toast","name":"Тост без добавок","description":"Горячий тост без добавок.","image":""},
-        {"id":"toast-cheese","group":"toast","name":"Тост с сыром","description":"Горячий тост с сыром.","image":""},
-        {"id":"toast-tomatoes","group":"toast","name":"Тост с помидорами","description":"Горячий тост с помидорами.","image":""},
-        {"id":"toast-sausage","group":"toast","name":"Тост с колбасой","description":"Горячий тост с колбасой.","image":""},
-        {"id":"toast-tomatoes-sausage","group":"toast","name":"Тост с помидорами и колбасой","description":"Горячий тост с помидорами и колбасой.","image":""},
-        {"id":"cheese-stick","name":"Сыр-палочка","description":"Сыр-палочка.","image":""},
         {"id":"yellow-cheese","name":"Жёлтый сыр","description":"Жёлтый сыр.","image":""},
-        {"id":"pancakes","name":"Оладушки","description":"Оладушки.","image":""}
+        {"id":"pancakes","name":"Оладушки","description":"Оладушки.","image":""},
+        {"id":"pita","name":"Пита","description":"Пита.","image":""},
+        {"id":"pita-tomatoes","name":"Пита с помидорами","description":"Пита с помидорами.","image":""},
+        {"id":"cheese-stick","name":"Сыр-палочка","description":"Сыр-палочка.","image":""},
+        {"id":"toast-plain","group":"toast","name":"Тост без добавок","description":"Горячий тост без добавок.","image":""},
+        {"id":"toast-sausage","group":"toast","name":"Тост с колбасой","description":"Горячий тост с колбасой.","image":""},
+        {"id":"toast-tomatoes","group":"toast","name":"Тост с помидорами","description":"Горячий тост с помидорами.","image":""},
+        {"id":"toast-tomatoes-sausage","group":"toast","name":"Тост с помидорами и колбасой","description":"Горячий тост с помидорами и колбасой.","image":""},
+        {"id":"toast-cheese","group":"toast","name":"Тост с сыром","description":"Горячий тост с сыром.","image":""},
+        {"id":"black-bread","name":"Чёрный хлеб","description":"Чёрный хлеб.","image":"assets/dishes/black-bread-20260912-0115.avif"}
       ]
     },
     {
@@ -105,11 +105,11 @@
       "name": "Овощи и салаты",
       "icon": "🥒",
       "items": [
+        {"id":"boiled-corn","name":"Варёная кукуруза","description":"Варёная кукуруза.","image":""},
+        {"id":"canned-corn","name":"Кукуруза из банки","description":"Кукуруза из банки.","image":""},
         {"id":"cucumber","name":"Огурцы","description":"Свежие огурцы.","image":""},
         {"id":"tomato","name":"Помидоры","description":"Свежие помидоры.","image":""},
         {"id":"cherry-tomatoes","name":"Помидоры черри","description":"Свежие помидоры черри.","image":""},
-        {"id":"canned-corn","name":"Кукуруза из банки","description":"Кукуруза из банки.","image":""},
-        {"id":"boiled-corn","name":"Варёная кукуруза","description":"Варёная кукуруза.","image":""},
         {"id":"tuna-salad","name":"Салат с тунцом","description":"Салат с тунцом.","image":""}
       ]
     },
@@ -118,11 +118,11 @@
       "name": "Фрукты",
       "icon": "🍎",
       "items": [
-        {"id":"apple","name":"Яблоко","description":"Яблоко.","image":""},
-        {"id":"banana","name":"Банан","description":"Банан.","image":"assets/dishes/banana-20260912-0115.avif"},
         {"id":"watermelon","name":"Арбуз","description":"Арбуз.","image":""},
+        {"id":"banana","name":"Банан","description":"Банан.","image":"assets/dishes/banana-20260912-0115.avif"},
+        {"id":"fruit-puree","name":"Детское фруктовое пюре","description":"Детское фруктовое пюре.","image":""},
         {"id":"strawberry","name":"Клубника","description":"Клубника.","image":""},
-        {"id":"fruit-puree","name":"Детское фруктовое пюре","description":"Детское фруктовое пюре.","image":""}
+        {"id":"apple","name":"Яблоко","description":"Яблоко.","image":""}
       ]
     },
     {
@@ -131,14 +131,14 @@
       "icon": "🍪",
       "items": [
         {"id":"actimel","name":"Актимелька","description":"Актимелька.","image":""},
+        {"id":"nutella-bun","name":"Булочка с Nutella","description":"Булочка с Nutella.","image":""},
+        {"id":"jelly","name":"Желе","description":"Желе.","image":""},
         {"id":"yogurt-candy","name":"Йогурт с конфетками","description":"Йогурт с конфетками.","image":""},
         {"id":"cornflakes","name":"Корнфлекс","description":"Корнфлекс.","image":""},
-        {"id":"jelly","name":"Желе","description":"Желе.","image":""},
-        {"id":"cookie","name":"Печенька","description":"Печенька.","image":""},
         {"id":"marshmallow","name":"Маршмеллоу","description":"Маршмеллоу.","image":""},
-        {"id":"lollipop","name":"Чупик","description":"Леденец на палочке.","image":""},
-        {"id":"nutella-bun","name":"Булочка с Nutella","description":"Булочка с Nutella.","image":""},
-        {"id":"nutella-bread","name":"Хлеб с Nutella","description":"Хлеб с Nutella.","image":""}
+        {"id":"cookie","name":"Печенька","description":"Печенька.","image":""},
+        {"id":"nutella-bread","name":"Хлеб с Nutella","description":"Хлеб с Nutella.","image":""},
+        {"id":"lollipop","name":"Чупик","description":"Леденец на палочке.","image":""}
       ]
     },
     {
@@ -146,14 +146,14 @@
       "name": "Напитки",
       "icon": "🥤",
       "items": [
+        {"id":"grape-juice","name":"Виноградный сок","description":"Виноградный сок.","image":""},
+        {"id":"water","name":"Вода","description":"Вода.","image":""},
         {"id":"milk","name":"Молоко","description":"Молоко.","image":""},
-        {"id":"shoko-chocolate","group":"shoko","name":"Шоко — шоколадный","description":"Обычный шоколадный Шоко.","image":""},
+        {"id":"tea","name":"Чай","description":"Чай.","image":""},
         {"id":"shoko-banana","group":"shoko","name":"Шоко — жёлтый","description":"Банановый Шоко.","image":""},
         {"id":"shoko-strawberry","group":"shoko","name":"Шоко — розовый","description":"Клубничный Шоко.","image":""},
-        {"id":"apple-juice","name":"Яблочный сок","description":"Яблочный сок.","image":""},
-        {"id":"grape-juice","name":"Виноградный сок","description":"Виноградный сок.","image":""},
-        {"id":"tea","name":"Чай","description":"Чай.","image":""},
-        {"id":"water","name":"Вода","description":"Вода.","image":""}
+        {"id":"shoko-chocolate","group":"shoko","name":"Шоко — шоколадный","description":"Обычный шоколадный Шоко.","image":""},
+        {"id":"apple-juice","name":"Яблочный сок","description":"Яблочный сок.","image":""}
       ]
     }
   ]
