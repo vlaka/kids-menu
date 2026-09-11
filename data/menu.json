@@ -1,6 +1,6 @@
 {
-  "updatedAt": "12.09.2026 00:18",
-  "menuVersion": "1.0.3",
+  "updatedAt": "12.09.2026 00:37",
+  "menuVersion": "1.0.4",
   "categories": [
     {
       "id": "soups",
@@ -85,7 +85,7 @@
       "icon": "🥪",
       "items": [
         {"id":"white-bread","name":"Белый хлеб","description":"Белый хлеб.","image":""},
-        {"id":"black-bread","name":"Чёрный хлеб","description":"Чёрный хлеб.","image":"assets/dishes/black-bread-20260912-0018.jpg"},
+        {"id":"black-bread","name":"Чёрный хлеб","description":"Чёрный хлеб.","image":"assets/dishes/black-bread-20260912-0028.svg"},
         {"id":"pita","name":"Пита","description":"Пита.","image":""},
         {"id":"bun","name":"Булочка","description":"Булочка.","image":""},
         {"id":"pita-tomatoes","name":"Пита с помидорами","description":"Пита с помидорами.","image":""},
@@ -119,7 +119,7 @@
       "icon": "🍎",
       "items": [
         {"id":"apple","name":"Яблоко","description":"Яблоко.","image":""},
-        {"id":"banana","name":"Банан","description":"Банан.","image":"assets/dishes/banana-20260912-0018.jpg"},
+        {"id":"banana","name":"Банан","description":"Банан.","image":"assets/dishes/banana-20260912-0028.svg"},
         {"id":"watermelon","name":"Арбуз","description":"Арбуз.","image":""},
         {"id":"strawberry","name":"Клубника","description":"Клубника.","image":""},
         {"id":"fruit-puree","name":"Детское фруктовое пюре","description":"Детское фруктовое пюре.","image":""}
