@@ -1,0 +1,57 @@
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-header-button {
+  position: relative;
+}
+
+.header-order-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #d66b32;
+  color: #fff;
+  border: 2px solid #fffaf5;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.header-order-count[hidden] {
+  display: none;
+}
+
+.dish-dialog-media {
+  padding: 18px;
+}
+
+.dish-dialog-image {
+  width: auto;
+  height: auto;
+  max-width: min(100%, 960px);
+  max-height: calc(70dvh - 36px);
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 10px 36px rgba(47, 42, 37, .14);
+}
+
+@media (min-width: 700px) {
+  .dish-dialog-image {
+    max-width: min(100%, 1100px);
+    max-height: calc(100dvh - 48px);
+  }
+}
+
+@media (max-width: 560px) {
+  .header-actions {
+    gap: 6px;
+  }
+}
