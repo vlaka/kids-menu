@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v18';
+const CACHE_NAME = 'kids-menu-v19';
 const APP_SHELL = [
   './',
   './index.html',
@@ -9,7 +9,8 @@ const APP_SHELL = [
   './manifest.webmanifest?v=18',
   './data/menu.json',
   './assets/schnitzel-icon.svg',
-  './assets/dishes/banana-v2.jpg'
+  './assets/dishes/banana-20260912-0018.jpg',
+  './assets/dishes/black-bread-20260912-0018.jpg'
 ];
 
 self.addEventListener('install', event => {
