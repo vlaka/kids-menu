@@ -98,6 +98,17 @@ function renderHome(categories) {
     button.addEventListener('click', () => selectCategory(category.id));
     categoryCardsEl.appendChild(button);
   }
+
+  const allButton = document.createElement('button');
+  allButton.type = 'button';
+  allButton.className = 'category-card';
+  allButton.innerHTML = `
+    <span class="category-card-icon">📋</span>
+    <span class="category-card-name">Показать всё</span>
+    <span class="category-card-count">Все блюда одним списком</span>
+  `;
+  allButton.addEventListener('click', () => selectCategory('all'));
+  categoryCardsEl.appendChild(allButton);
 }
 
 function renderTabs(categories) {
@@ -193,6 +204,33 @@ async function loadMenu({ force = false } = {}) {
   }
 }
 
+async function hardRefreshApp() {
+  refreshButton.disabled = true;
+  setStatus('Проверяю новую версию приложения…');
+
+  try {
+    if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.getRegistration();
+      if (registration) {
+        await registration.update();
+      }
+    }
+
+    if ('caches' in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map(key => caches.delete(key)));
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set('refresh', Date.now().toString());
+    window.location.replace(url.toString());
+  } catch (error) {
+    console.error(error);
+    setStatus('Не удалось полностью обновить приложение. Попробуй ещё раз.');
+    refreshButton.disabled = false;
+  }
+}
+
 homeButton.addEventListener('click', () => selectCategory('home'));
 settingsButton.addEventListener('click', () => settingsDialog.showModal());
 closeSettingsButton.addEventListener('click', () => settingsDialog.close());
@@ -201,9 +239,7 @@ settingsDialog.addEventListener('click', event => {
   const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
   if (outside) settingsDialog.close();
 });
-refreshButton.addEventListener('click', async () => {
-  await loadMenu({ force: true });
-});
+refreshButton.addEventListener('click', hardRefreshApp);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => serviceWorkerRegistration());
