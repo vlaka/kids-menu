@@ -15,6 +15,28 @@ function setStatus(message) {
   statusEl.textContent = message;
 }
 
+function buildDishCard(dish) {
+  const dishNode = dishTemplate.content.cloneNode(true);
+  const card = dishNode.querySelector('.dish-card');
+  card.dataset.dishId = dish.id ?? '';
+  if (dish.group) card.dataset.group = dish.group;
+
+  dishNode.querySelector('.dish-name').textContent = dish.name ?? '';
+  dishNode.querySelector('.dish-description').textContent = dish.description ?? '';
+
+  const image = dishNode.querySelector('.dish-photo');
+  const placeholder = dishNode.querySelector('.dish-placeholder');
+
+  if (dish.image) {
+    image.src = dish.image;
+    image.alt = dish.name ?? 'Блюдо';
+    image.hidden = false;
+    placeholder.hidden = true;
+  }
+
+  return dishNode;
+}
+
 function renderMenu(data) {
   menuEl.replaceChildren();
   categoryNav.replaceChildren();
@@ -40,28 +62,34 @@ function renderMenu(data) {
     categoryNode.querySelector('.category-title').textContent = category.name;
     const grid = categoryNode.querySelector('.dish-grid');
 
-    for (const dish of category.items ?? []) {
-      const dishNode = dishTemplate.content.cloneNode(true);
-      dishNode.querySelector('.dish-name').textContent = dish.name ?? '';
-      dishNode.querySelector('.dish-description').textContent = dish.description ?? '';
+    const items = category.items ?? [];
+    let index = 0;
 
-      const image = dishNode.querySelector('.dish-photo');
-      const placeholder = dishNode.querySelector('.dish-placeholder');
+    while (index < items.length) {
+      const dish = items[index];
 
-      if (dish.image) {
-        image.src = dish.image;
-        image.alt = dish.name ?? 'Блюдо';
-        image.hidden = false;
-        placeholder.hidden = true;
+      if (!dish.group) {
+        grid.appendChild(buildDishCard(dish));
+        index += 1;
+        continue;
       }
 
-      grid.appendChild(dishNode);
+      const family = document.createElement('div');
+      family.className = 'dish-family';
+      family.dataset.group = dish.group;
+
+      while (index < items.length && items[index].group === dish.group) {
+        family.appendChild(buildDishCard(items[index]));
+        index += 1;
+      }
+
+      grid.appendChild(family);
     }
 
     menuEl.appendChild(categoryNode);
   }
 
-  lastUpdatedEl.textContent = `Последнее обновление: ${data.updatedAt ?? 'неизвестно'}`;
+  lastUpdatedEl.textContent = `Последнее обновление: ${data.updatedAt ?? 'неизвестно'}${data.menuVersion ? ` · меню ${data.menuVersion}` : ''}`;
 }
 
 async function loadMenu({ force = false } = {}) {
