@@ -15,6 +15,7 @@ const homeButton = document.getElementById('homeButton');
 const DATA_URL = 'data/menu.json';
 let currentData = null;
 let activeCategory = 'home';
+let lastRefreshCheck = null;
 
 function setStatus(message) {
   statusEl.textContent = message;
@@ -120,6 +121,15 @@ function renderTabs(categories) {
   }
 }
 
+function updateInfo(data) {
+  const parts = [
+    `Меню: ${data.menuVersion ?? 'неизвестно'}`,
+    `данные: ${data.updatedAt ?? 'неизвестно'}`
+  ];
+  if (lastRefreshCheck) parts.push(`проверено: ${lastRefreshCheck}`);
+  lastUpdatedEl.textContent = parts.join(' · ');
+}
+
 function renderMenu(data) {
   currentData = data;
   const categories = data.categories ?? [];
@@ -139,13 +149,24 @@ function renderMenu(data) {
     if (selected) renderCategory(selected);
   }
 
-  lastUpdatedEl.textContent = `Последнее обновление: ${data.updatedAt ?? 'неизвестно'}${data.menuVersion ? ` · меню ${data.menuVersion}` : ''}`;
+  updateInfo(data);
 }
 
 function selectCategory(categoryId) {
   activeCategory = categoryId;
   if (currentData) renderMenu(currentData);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nowText() {
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }).format(new Date()).replace(',', '');
 }
 
 async function loadMenu({ force = false } = {}) {
@@ -161,8 +182,9 @@ async function loadMenu({ force = false } = {}) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const data = await response.json();
+    if (force) lastRefreshCheck = nowText();
     renderMenu(data);
-    setStatus('');
+    setStatus(force ? 'Меню проверено и обновлено.' : '');
   } catch (error) {
     console.error(error);
     setStatus('Не удалось загрузить меню. Открой настройки и попробуй обновить ещё раз.');
