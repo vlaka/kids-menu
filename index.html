@@ -12,40 +12,47 @@
 <body>
   <header class="app-header">
     <div>
-      <p class="eyebrow">Наш семейный ресторан</p>
+      <p class="eyebrow">Наш ресторан</p>
       <h1>Личный ресторан Арианы и Алисы</h1>
     </div>
-    <button id="refreshButton" class="refresh-button" type="button" aria-label="Обновить меню">
-      ↻ Обновить меню
-    </button>
+    <button id="refreshButton" class="refresh-button" type="button">↻ Обновить</button>
   </header>
 
   <main class="page">
+    <section class="hero">
+      <div>
+        <p class="hero-kicker">Сегодня в меню</p>
+        <h2>Выбирайте, что приготовить 🍽️</h2>
+        <p class="hero-text">Все блюда нашего домашнего ресторана собраны здесь.</p>
+      </div>
+    </section>
+
+    <nav id="categoryNav" class="category-nav" aria-label="Категории меню"></nav>
     <section id="status" class="status" aria-live="polite"></section>
-    <section id="menu" class="menu-grid" aria-label="Меню ресторана"></section>
+    <section id="menu" class="menu-sections" aria-label="Меню ресторана"></section>
   </main>
 
-  <template id="dayTemplate">
-    <article class="day-card">
-      <div class="day-heading">
-        <div>
-          <p class="day-date"></p>
-          <h2 class="day-name"></h2>
-        </div>
+  <template id="categoryTemplate">
+    <section class="category-section">
+      <div class="section-heading">
+        <span class="category-icon"></span>
+        <h2 class="category-title"></h2>
       </div>
-      <div class="meals"></div>
-    </article>
+      <div class="dish-grid"></div>
+    </section>
   </template>
 
-  <template id="mealTemplate">
-    <div class="meal">
-      <div class="meal-time"></div>
-      <div class="meal-body">
-        <h3 class="meal-name"></h3>
-        <p class="meal-description"></p>
-        <img class="meal-image" alt="" loading="lazy" hidden />
+  <template id="dishTemplate">
+    <article class="dish-card">
+      <div class="dish-photo-wrap">
+        <img class="dish-photo" alt="" loading="lazy" hidden />
+        <div class="dish-placeholder" aria-hidden="true">🍽️</div>
       </div>
-    </div>
+      <div class="dish-content">
+        <h3 class="dish-name"></h3>
+        <p class="dish-description"></p>
+      </div>
+    </article>
   </template>
 
   <script src="app.js" defer></script>
