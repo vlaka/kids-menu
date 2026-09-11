@@ -147,6 +147,18 @@ h1 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+  align-items: start;
+}
+
+.dish-family {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #ead8c7;
+  border-radius: 24px;
+  background: rgba(255, 240, 220, .48);
 }
 
 .dish-card {
@@ -156,6 +168,11 @@ h1 {
   border: 1px solid #efe2d5;
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(120, 84, 49, .07);
+}
+
+.dish-family .dish-card {
+  border-color: #e8d3bf;
+  box-shadow: 0 5px 16px rgba(120, 84, 49, .06);
 }
 
 .dish-photo-wrap {
@@ -254,10 +271,12 @@ h1 {
 
 @media (min-width: 700px) {
   .dish-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dish-family { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (min-width: 980px) {
   .dish-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .dish-family { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (max-width: 560px) {
