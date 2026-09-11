@@ -115,6 +115,7 @@ function renderTabs(categories) {
   categoryNav.replaceChildren();
 
   const tabs = [
+    { id: 'home', name: 'Домой', icon: '🏠' },
     ...categories.map(category => ({ id: category.id, name: category.name, icon: category.icon, iconImage: category.iconImage })),
     { id: 'all', name: 'Показать всё', icon: '📋' }
   ];
