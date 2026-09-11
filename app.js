@@ -13,6 +13,9 @@ const dishTemplate = document.getElementById('dishTemplate');
 const homeButton = document.getElementById('homeButton');
 
 const DATA_URL = 'data/menu.json';
+const DISH_IMAGE_OVERRIDES = {
+  banana: 'assets/dishes/banana.jpg'
+};
 let currentData = null;
 let activeCategory = 'home';
 let lastRefreshCheck = null;
@@ -39,9 +42,10 @@ function buildDishCard(dish) {
 
   const image = dishNode.querySelector('.dish-photo');
   const placeholder = dishNode.querySelector('.dish-placeholder');
+  const dishImage = dish.image || DISH_IMAGE_OVERRIDES[dish.id];
 
-  if (dish.image) {
-    image.src = dish.image;
+  if (dishImage) {
+    image.src = dishImage;
     image.alt = dish.name ?? 'Блюдо';
     image.hidden = false;
     placeholder.hidden = true;
