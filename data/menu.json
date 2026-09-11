@@ -43,21 +43,35 @@
       ]
     },
     {
-      "id": "hot-dishes",
-      "name": "Горячие блюда",
-      "icon": "🍽️",
+      "id": "meat-dishes",
+      "name": "Мясные блюда",
+      "icon": "🍖",
       "items": [
         {"id":"meat","name":"Мяско","description":"Мяско.","image":""},
         {"id":"chicken","name":"Курица","description":"Курица.","image":""},
         {"id":"sausage","name":"Колбаска","description":"Колбаска.","image":""},
-        {"id":"russian-sausage","name":"Русская колбаска","description":"Русская колбаска.","image":""},
+        {"id":"russian-sausage","name":"Русская колбаска","description":"Русская колбаска.","image":""}
+      ]
+    },
+    {
+      "id": "schnitzels",
+      "name": "Шницели",
+      "icon": "🍗",
+      "items": [
         {"id":"schnitzel-plain","group":"schnitzel","name":"Шницель — обычный","description":"Обычный шницель.","image":""},
         {"id":"schnitzel-cut","group":"schnitzel","name":"Шницель — порезанный","description":"Шницель, порезанный на кусочки.","image":""},
         {"id":"schnitzel-sticks","group":"schnitzel","name":"Шницель — палочки","description":"Шницель, нарезанный палочками.","image":""},
         {"id":"schnitzel-stars","group":"schnitzel","name":"Шницель — звёздочки","description":"Шницель в виде звёздочек.","image":""},
         {"id":"corn-schnitzel-plain","group":"corn-schnitzel","name":"Шницель тирас — обычный","description":"Обычный шницель тирас.","image":""},
         {"id":"corn-schnitzel-cut","group":"corn-schnitzel","name":"Шницель тирас — порезанный","description":"Шницель тирас, порезанный на кусочки.","image":""},
-        {"id":"corn-schnitzel-sticks","group":"corn-schnitzel","name":"Шницель тирас — палочки","description":"Шницель тирас, нарезанный палочками.","image":""},
+        {"id":"corn-schnitzel-sticks","group":"corn-schnitzel","name":"Шницель тирас — палочки","description":"Шницель тирас, нарезанный палочками.","image":""}
+      ]
+    },
+    {
+      "id": "fast-food",
+      "name": "Фастфуд",
+      "icon": "🍔",
+      "items": [
         {"id":"hamburger","name":"Гамбургер","description":"Гамбургер.","image":""},
         {"id":"hot-dog","name":"Хот-дог","description":"Хот-дог.","image":""},
         {"id":"pizza","name":"Пицца","description":"Пицца.","image":""},
