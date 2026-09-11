@@ -1,7 +1,7 @@
 {
-  "name": "Kids Menu",
-  "short_name": "Kids Menu",
-  "description": "Семейное детское меню",
+  "name": "Личный ресторан Арианы и Алисы",
+  "short_name": "Наш ресторан",
+  "description": "Личный ресторан Арианы и Алисы",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#fffaf5",
