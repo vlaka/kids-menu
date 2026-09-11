@@ -1,11 +1,12 @@
-const CACHE_NAME = 'kids-menu-v9';
+const CACHE_NAME = 'kids-menu-v10';
 const APP_SHELL = [
   './',
   './index.html',
   './styles.css',
   './app.js',
   './manifest.webmanifest',
-  './data/menu.json'
+  './data/menu.json',
+  './assets/schnitzel-icon.svg'
 ];
 
 self.addEventListener('install', event => {
