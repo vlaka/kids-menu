@@ -1,6 +1,6 @@
 {
-  "updatedAt": "12.09.2026 01:15",
-  "menuVersion": "1.0.8",
+  "updatedAt": "12.09.2026 01:16",
+  "menuVersion": "1.0.9",
   "categories": [
     {
       "id": "soups",
@@ -147,8 +147,9 @@
       "icon": "🥤",
       "items": [
         {"id":"milk","name":"Молоко","description":"Молоко.","image":""},
-        {"id":"shoko-yellow","group":"shoko","name":"Шоко — жёлтый","description":"Шоколадный Шоко.","image":""},
-        {"id":"shoko-pink","group":"shoko","name":"Шоко — розовый","description":"Розовый Шоко.","image":""},
+        {"id":"shoko-chocolate","group":"shoko","name":"Шоко — шоколадный","description":"Обычный шоколадный Шоко.","image":""},
+        {"id":"shoko-banana","group":"shoko","name":"Шоко — жёлтый","description":"Банановый Шоко.","image":""},
+        {"id":"shoko-strawberry","group":"shoko","name":"Шоко — розовый","description":"Клубничный Шоко.","image":""},
         {"id":"apple-juice","name":"Яблочный сок","description":"Яблочный сок.","image":""},
         {"id":"grape-juice","name":"Виноградный сок","description":"Виноградный сок.","image":""},
         {"id":"tea","name":"Чай","description":"Чай.","image":""},
