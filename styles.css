@@ -155,6 +155,12 @@ h1 {
   border: 1px solid #efe2d5;
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(120, 84, 49, .07);
+  cursor: pointer;
+  outline: none;
+}
+
+.dish-card:focus-visible {
+  box-shadow: 0 0 0 3px #d79a68, 0 8px 24px rgba(120, 84, 49, .07);
 }
 
 .dish-family .dish-card {
@@ -187,10 +193,14 @@ h1 {
 
 .dish-placeholder[hidden] { display: none; }
 
-.dish-content { padding: 13px; }
+.dish-content {
+  display: grid;
+  gap: 8px;
+  padding: 13px;
+}
 
 .dish-name {
-  margin: 0 0 5px;
+  margin: 0;
   font-size: 17px;
   line-height: 1.2;
 }
@@ -201,6 +211,45 @@ h1 {
   font-size: 14px;
   line-height: 1.4;
 }
+
+.order-button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 11px 12px;
+  background: #2f2a25;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.order-button.remove {
+  background: #fff1e6;
+  color: #8c4726;
+  border: 1px solid #e9c7ae;
+}
+
+.order-empty {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  border: 1px dashed #dcc5b0;
+  border-radius: 24px;
+  padding: 28px;
+  background: rgba(255,255,255,.65);
+  text-align: center;
+  color: #6c6158;
+}
+
+.order-empty strong {
+  color: #2f2a25;
+  font-size: 20px;
+}
+
+.order-empty-icon { font-size: 42px; }
 
 .bottom-nav {
   position: fixed;
@@ -234,9 +283,116 @@ h1 {
   cursor: pointer;
 }
 
-.bottom-nav-item span { font-size: 20px; }
+.bottom-nav-icon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  min-height: 24px;
+  font-size: 20px;
+}
+
 .bottom-nav-item small { font-size: 11px; font-weight: 700; white-space: nowrap; }
 .bottom-nav-item.active { background: #2f2a25; color: #fff; }
+
+.order-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #d66b32;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.dish-dialog {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #fffaf5;
+  color: #2f2a25;
+}
+
+.dish-dialog::backdrop { background: rgba(47, 42, 37, .55); }
+
+.dish-dialog-shell {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  background: #fffaf5;
+}
+
+.dish-dialog-close {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.94);
+  color: #2f2a25;
+  box-shadow: 0 6px 22px rgba(0,0,0,.2);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.dish-dialog-media {
+  position: relative;
+  min-height: 52dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #f8eee5;
+}
+
+.dish-dialog-image {
+  width: 100%;
+  height: 100%;
+  max-height: 70dvh;
+  object-fit: contain;
+  display: block;
+}
+
+.dish-dialog-placeholder {
+  width: 100%;
+  min-height: 52dvh;
+  display: grid;
+  place-items: center;
+  font-size: 96px;
+  background: linear-gradient(135deg, #fff0dd, #fff9f2);
+}
+
+.dish-dialog-placeholder[hidden] { display: none; }
+
+.dish-dialog-content {
+  padding: 24px 22px calc(30px + env(safe-area-inset-bottom));
+  background: #fffaf5;
+}
+
+.dish-dialog-content h2 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 7vw, 44px);
+}
+
+.dish-dialog-content p {
+  margin: 0;
+  color: #6c6158;
+  font-size: clamp(17px, 4vw, 22px);
+  line-height: 1.45;
+}
 
 .settings-dialog {
   width: min(92vw, 420px);
@@ -296,6 +452,10 @@ h1 {
   .category-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .dish-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .dish-family { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dish-dialog-shell { grid-template-columns: minmax(0, 1.4fr) minmax(320px, .6fr); grid-template-rows: 100dvh; }
+  .dish-dialog-media { min-height: 100dvh; }
+  .dish-dialog-image { max-height: 100dvh; }
+  .dish-dialog-content { align-self: center; padding: 40px; }
 }
 
 @media (min-width: 980px) {
@@ -310,4 +470,5 @@ h1 {
   .category-card { min-height: 125px; padding: 14px; }
   .category-card-icon { font-size: 34px; }
   .category-card-name { font-size: 16px; }
+  .order-button { font-size: 12px; padding: 10px 8px; }
 }
