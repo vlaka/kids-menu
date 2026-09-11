@@ -1,0 +1,11 @@
+{
+  "name": "Kids Menu",
+  "short_name": "Kids Menu",
+  "description": "Семейное детское меню",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffaf5",
+  "theme_color": "#fff7ed",
+  "lang": "ru",
+  "icons": []
+}
