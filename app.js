@@ -82,6 +82,13 @@ function toggleOrder(dishId) {
   if (currentData) renderMenu(currentData);
 }
 
+function clearOrder() {
+  if (!orderIds.size) return;
+  orderIds.clear();
+  saveOrderIds();
+  if (currentData) renderMenu(currentData);
+}
+
 function buildDishCard(dish, { orderView = false } = {}) {
   const dishNode = dishTemplate.content.cloneNode(true);
   const card = dishNode.querySelector('.dish-card');
@@ -172,6 +179,14 @@ function renderOrder() {
     empty.innerHTML = '<div class="order-empty-icon">🧾</div><strong>Заказ пока пуст</strong><span>Добавьте блюда из меню — они появятся здесь.</span>';
     section.appendChild(empty);
   } else {
+    const clearButton = document.createElement('button');
+    clearButton.type = 'button';
+    clearButton.className = 'order-button remove';
+    clearButton.textContent = 'Очистить заказ';
+    clearButton.style.marginBottom = '12px';
+    clearButton.addEventListener('click', clearOrder);
+    section.appendChild(clearButton);
+
     const grid = document.createElement('div');
     grid.className = 'dish-grid';
     for (const dish of selected) grid.appendChild(buildDishCard(dish, { orderView: true }));
