@@ -1,4 +1,6 @@
 const menuEl = document.getElementById('menu');
+const homeView = document.getElementById('homeView');
+const categoryCardsEl = document.getElementById('categoryCards');
 const statusEl = document.getElementById('status');
 const refreshButton = document.getElementById('refreshButton');
 const settingsButton = document.getElementById('settingsButton');
@@ -73,6 +75,23 @@ function renderCategory(category) {
   menuEl.appendChild(categoryNode);
 }
 
+function renderHome(categories) {
+  categoryCardsEl.replaceChildren();
+
+  for (const category of categories) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'category-card';
+    button.innerHTML = `
+      <span class="category-card-icon">${category.icon ?? '🍽️'}</span>
+      <span class="category-card-name">${category.name}</span>
+      <span class="category-card-count">${category.items?.length ?? 0} блюд</span>
+    `;
+    button.addEventListener('click', () => selectCategory(category.id));
+    categoryCardsEl.appendChild(button);
+  }
+}
+
 function renderTabs(categories) {
   categoryNav.replaceChildren();
 
@@ -84,9 +103,9 @@ function renderTabs(categories) {
   for (const tab of tabs) {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'category-chip';
+    button.className = 'bottom-nav-item';
     button.dataset.category = tab.id;
-    button.textContent = `${tab.icon ?? '🍽️'} ${tab.name}`;
+    button.innerHTML = `<span>${tab.icon ?? '🍽️'}</span><small>${tab.name}</small>`;
     button.classList.toggle('active', tab.id === activeCategory);
     button.setAttribute('aria-pressed', tab.id === activeCategory ? 'true' : 'false');
     button.addEventListener('click', () => selectCategory(tab.id));
@@ -96,17 +115,19 @@ function renderTabs(categories) {
 
 function renderMenu(data) {
   currentData = data;
+  const categories = data.categories ?? [];
+
+  renderTabs(categories);
+  renderHome(categories);
   menuEl.replaceChildren();
 
-  const categories = data.categories ?? [];
-  renderTabs(categories);
+  const onHome = activeCategory === 'all';
+  homeView.hidden = !onHome;
+  menuEl.hidden = onHome;
 
-  const visibleCategories = activeCategory === 'all'
-    ? categories
-    : categories.filter(category => category.id === activeCategory);
-
-  for (const category of visibleCategories) {
-    renderCategory(category);
+  if (!onHome) {
+    const selected = categories.find(category => category.id === activeCategory);
+    if (selected) renderCategory(selected);
   }
 
   lastUpdatedEl.textContent = `Последнее обновление: ${data.updatedAt ?? 'неизвестно'}${data.menuVersion ? ` · меню ${data.menuVersion}` : ''}`;
