@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff7ed" />
+  <meta name="description" content="Семейное детское меню" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Kids Menu</title>
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Детское меню</p>
+      <h1>Меню Арианы</h1>
+    </div>
+    <button id="refreshButton" class="refresh-button" type="button" aria-label="Обновить меню">
+      ↻ Обновить
+    </button>
+  </header>
+
+  <main class="page">
+    <section id="status" class="status" aria-live="polite"></section>
+    <section id="menu" class="menu-grid" aria-label="Меню на неделю"></section>
+  </main>
+
+  <template id="dayTemplate">
+    <article class="day-card">
+      <div class="day-heading">
+        <div>
+          <p class="day-date"></p>
+          <h2 class="day-name"></h2>
+        </div>
+      </div>
+      <div class="meals"></div>
+    </article>
+  </template>
+
+  <template id="mealTemplate">
+    <div class="meal">
+      <div class="meal-time"></div>
+      <div class="meal-body">
+        <h3 class="meal-name"></h3>
+        <p class="meal-description"></p>
+        <img class="meal-image" alt="" loading="lazy" hidden />
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
