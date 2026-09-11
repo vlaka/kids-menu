@@ -49,6 +49,13 @@ function categoryIconMarkup(category, size = 32) {
   return category.icon ?? '🍽️';
 }
 
+function syncHeaderNavigation() {
+  const onHome = activeCategory === 'home';
+  homeButton.textContent = onHome ? '🏠' : '←';
+  homeButton.setAttribute('aria-label', onHome ? 'Главная' : 'Назад');
+  homeButton.title = onHome ? 'Главная' : 'Назад';
+}
+
 function findDish(dishId) {
   for (const category of currentData?.categories ?? []) {
     const dish = (category.items ?? []).find(item => item.id === dishId);
@@ -72,7 +79,15 @@ function openDishDialog(dish) {
     dishDialogPlaceholder.hidden = false;
   }
 
+  if (!history.state?.dialog) {
+    history.pushState({ view: activeCategory, dialog: dish.id }, '');
+  }
   dishDialog.showModal();
+}
+
+function closeDishDialogWithHistory() {
+  if (history.state?.dialog) history.back();
+  else if (dishDialog.open) dishDialog.close();
 }
 
 function toggleOrder(dishId) {
@@ -254,6 +269,7 @@ function renderMenu(data) {
   const onHome = activeCategory === 'home';
   homeView.hidden = !onHome;
   menuEl.hidden = onHome;
+  syncHeaderNavigation();
 
   if (activeCategory === 'all') {
     for (const category of categories) renderCategory(category);
@@ -267,10 +283,14 @@ function renderMenu(data) {
   updateInfo(data);
 }
 
-function selectCategory(categoryId) {
+function selectCategory(categoryId, { fromHistory = false, replace = false } = {}) {
+  if (!fromHistory && categoryId !== activeCategory) {
+    const method = replace ? 'replaceState' : 'pushState';
+    history[method]({ view: categoryId }, '');
+  }
   activeCategory = categoryId;
   if (currentData) renderMenu(currentData);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: fromHistory ? 'auto' : 'smooth' });
 }
 
 function nowText() {
@@ -333,7 +353,19 @@ async function hardRefreshApp() {
   }
 }
 
-homeButton.addEventListener('click', () => selectCategory('home'));
+homeButton.addEventListener('click', () => {
+  if (activeCategory === 'home') return;
+  if (history.state?.view) history.back();
+  else selectCategory('home', { replace: true });
+});
+
+window.addEventListener('popstate', event => {
+  if (dishDialog.open) dishDialog.close();
+  if (settingsDialog.open) settingsDialog.close();
+  const view = event.state?.view ?? 'home';
+  selectCategory(view, { fromHistory: true });
+});
+
 settingsButton.addEventListener('click', () => settingsDialog.showModal());
 closeSettingsButton.addEventListener('click', () => settingsDialog.close());
 settingsDialog.addEventListener('click', event => {
@@ -341,16 +373,28 @@ settingsDialog.addEventListener('click', event => {
   const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
   if (outside) settingsDialog.close();
 });
-closeDishButton.addEventListener('click', () => dishDialog.close());
+closeDishButton.addEventListener('click', closeDishDialogWithHistory);
+dishDialog.addEventListener('cancel', event => {
+  if (history.state?.dialog) {
+    event.preventDefault();
+    history.back();
+  }
+});
 dishDialog.addEventListener('click', event => {
-  if (event.target === dishDialog) dishDialog.close();
+  if (event.target === dishDialog) closeDishDialogWithHistory();
 });
 refreshButton.addEventListener('click', hardRefreshApp);
+
+if (!history.state?.view) {
+  history.replaceState({ view: 'home' }, '');
+} else {
+  activeCategory = history.state.view;
+}
 
 if ('serviceWorker' in navigator) window.addEventListener('load', () => serviceWorkerRegistration());
 async function serviceWorkerRegistration() {
   try {
-    await navigator.serviceWorker.register('service-worker.js?v=24', { updateViaCache: 'none' });
+    await navigator.serviceWorker.register('service-worker.js?v=25', { updateViaCache: 'none' });
   } catch (error) {
     console.error('Service worker registration failed', error);
   }
