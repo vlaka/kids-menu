@@ -10,6 +10,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
+  padding-bottom: 86px;
   background: linear-gradient(180deg, #fff7ed 0%, #fffdf9 100%);
 }
 
@@ -31,8 +32,7 @@ button { font: inherit; }
 
 .header-title { min-width: 0; }
 
-.eyebrow,
-.hero-kicker {
+.eyebrow {
   margin: 0 0 4px;
   font-size: 12px;
   font-weight: 800;
@@ -72,72 +72,50 @@ h1 {
   padding: 18px;
 }
 
-.hero {
-  margin-bottom: 14px;
-  padding: 24px;
-  border: 1px solid #f0dfce;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #fff0dc, #fff9f1);
-  box-shadow: 0 12px 34px rgba(120, 84, 49, .08);
-}
-
-.hero h2 {
-  margin: 0 0 8px;
-  font-size: clamp(25px, 6vw, 40px);
-}
-
-.hero-text {
-  margin: 0;
-  color: #6c5f55;
-  line-height: 1.5;
-}
-
-.category-nav {
-  position: sticky;
-  top: 72px;
-  z-index: 15;
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  margin: 0 -18px;
-  padding: 10px 18px 12px;
-  scrollbar-width: none;
-  background: rgba(255, 250, 245, .92);
-  backdrop-filter: blur(10px);
-}
-
-.category-nav::-webkit-scrollbar { display: none; }
-
-.category-chip {
-  flex: 0 0 auto;
-  border: 1px solid #ead8c7;
-  border-radius: 999px;
-  padding: 10px 13px;
-  background: #fff;
-  color: #463d36;
-  font-weight: 750;
-  cursor: pointer;
-}
-
-.category-chip.active {
-  background: #2f2a25;
-  color: #fff;
-  border-color: #2f2a25;
-}
-
 .status {
-  min-height: 22px;
-  margin: 8px 2px 6px;
+  min-height: 18px;
+  margin: 0 2px 8px;
   color: #74685f;
   font-size: 13px;
 }
+
+.home-heading h2 {
+  margin: 4px 0 14px;
+  font-size: 28px;
+}
+
+.category-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.category-card {
+  min-height: 150px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  border: 1px solid #ead8c7;
+  border-radius: 24px;
+  padding: 18px;
+  background: linear-gradient(135deg, #fff0dc, #fffaf4);
+  color: #2f2a25;
+  box-shadow: 0 10px 28px rgba(120, 84, 49, .08);
+  cursor: pointer;
+  text-align: center;
+}
+
+.category-card-icon { font-size: 42px; }
+.category-card-name { font-size: 18px; font-weight: 800; line-height: 1.15; }
+.category-card-count { font-size: 13px; color: #7b6c60; }
 
 .menu-sections {
   display: grid;
   gap: 28px;
 }
 
-.category-section { scroll-margin-top: 145px; }
+.category-section { scroll-margin-top: 90px; }
 
 .section-heading {
   display: flex;
@@ -224,6 +202,42 @@ h1 {
   line-height: 1.4;
 }
 
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  background: rgba(255, 250, 245, .97);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid #ead8c7;
+  scrollbar-width: none;
+}
+
+.bottom-nav::-webkit-scrollbar { display: none; }
+
+.bottom-nav-item {
+  flex: 0 0 auto;
+  min-width: 72px;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 16px;
+  padding: 7px 10px;
+  background: transparent;
+  color: #6c6158;
+  cursor: pointer;
+}
+
+.bottom-nav-item span { font-size: 20px; }
+.bottom-nav-item small { font-size: 11px; font-weight: 700; white-space: nowrap; }
+.bottom-nav-item.active { background: #2f2a25; color: #fff; }
+
 .settings-dialog {
   width: min(92vw, 420px);
   border: 1px solid #ead8c7;
@@ -279,11 +293,13 @@ h1 {
 }
 
 @media (min-width: 700px) {
+  .category-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .dish-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .dish-family { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (min-width: 980px) {
+  .category-card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .dish-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .dish-family { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
@@ -291,5 +307,7 @@ h1 {
 @media (max-width: 560px) {
   .app-header { padding-inline: 12px; }
   .icon-button { width: 40px; height: 40px; font-size: 18px; }
-  .category-nav { top: 68px; }
+  .category-card { min-height: 125px; padding: 14px; }
+  .category-card-icon { font-size: 34px; }
+  .category-card-name { font-size: 16px; }
 }
