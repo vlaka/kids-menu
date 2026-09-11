@@ -56,7 +56,7 @@
     {
       "id": "schnitzels",
       "name": "Шницели",
-      "icon": "🍗",
+      "icon": "🍽️",
       "items": [
         {"id":"schnitzel-plain","group":"schnitzel","name":"Шницель — обычный","description":"Обычный шницель.","image":""},
         {"id":"schnitzel-cut","group":"schnitzel","name":"Шницель — порезанный","description":"Шницель, порезанный на кусочки.","image":""},
