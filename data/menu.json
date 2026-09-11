@@ -1,6 +1,6 @@
 {
-  "updatedAt": "12.09.2026 01:18",
-  "menuVersion": "1.0.10",
+  "updatedAt": "12.09.2026 01:20",
+  "menuVersion": "1.0.11",
   "categories": [
     {
       "id": "soups",
@@ -84,20 +84,21 @@
       "name": "Закуски",
       "icon": "🥪",
       "items": [
-        {"id":"white-bread","name":"Белый хлеб","description":"Белый хлеб.","image":""},
-        {"id":"bun","name":"Булочка","description":"Булочка.","image":""},
+        {"id":"white-bread","group":"bread","name":"Белый хлеб","description":"Белый хлеб.","image":""},
+        {"id":"bun","group":"bread","name":"Булочка","description":"Булочка.","image":""},
+        {"id":"pita","group":"bread","name":"Пита","description":"Пита.","image":""},
+        {"id":"half-pita","group":"bread","name":"Половинка питы","description":"Половинка питы.","image":""},
+        {"id":"black-bread","group":"bread","name":"Чёрный хлеб","description":"Чёрный хлеб.","image":"assets/dishes/black-bread-20260912-0115.avif"},
         {"id":"gvina-levana-sandwich","name":"Бутерброд с гвиной леваной","description":"Бутерброд с гвиной леваной.","image":""},
         {"id":"yellow-cheese","name":"Жёлтый сыр","description":"Жёлтый сыр.","image":""},
         {"id":"pancakes","name":"Оладушки","description":"Оладушки.","image":""},
-        {"id":"pita","name":"Пита","description":"Пита.","image":""},
         {"id":"pita-tomatoes","name":"Пита с помидорами","description":"Пита с помидорами.","image":""},
         {"id":"cheese-stick","name":"Сыр-палочка","description":"Сыр-палочка.","image":""},
         {"id":"toast-plain","group":"toast","name":"Тост без добавок","description":"Горячий тост без добавок.","image":""},
         {"id":"toast-sausage","group":"toast","name":"Тост с колбасой","description":"Горячий тост с колбасой.","image":""},
         {"id":"toast-tomatoes","group":"toast","name":"Тост с помидорами","description":"Горячий тост с помидорами.","image":""},
         {"id":"toast-tomatoes-sausage","group":"toast","name":"Тост с помидорами и колбасой","description":"Горячий тост с помидорами и колбасой.","image":""},
-        {"id":"toast-cheese","group":"toast","name":"Тост с сыром","description":"Горячий тост с сыром.","image":""},
-        {"id":"black-bread","name":"Чёрный хлеб","description":"Чёрный хлеб.","image":"assets/dishes/black-bread-20260912-0115.avif"}
+        {"id":"toast-cheese","group":"toast","name":"Тост с сыром","description":"Горячий тост с сыром.","image":""}
       ]
     },
     {
