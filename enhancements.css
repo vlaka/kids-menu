@@ -96,6 +96,12 @@
   box-shadow: 0 10px 36px rgba(47, 42, 37, .14);
 }
 
+.dish-dialog-order-button {
+  margin-top: 20px;
+  min-height: 52px;
+  font-size: 15px;
+}
+
 html[data-theme="dark"] { background: #171411; color: #f4ede6; }
 html[data-theme="dark"] body { background: linear-gradient(180deg, #171411 0%, #201b17 100%); color: #f4ede6; }
 html[data-theme="dark"] .app-header,
