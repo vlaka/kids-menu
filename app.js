@@ -283,8 +283,10 @@ async function loadMenu({ force = false } = {}) {
   refreshButton.disabled = true;
   setStatus(force ? 'Обновляю меню…' : 'Загружаю меню…');
   try {
-    const cacheBust = force ? `?t=${Date.now()}` : '';
-    const response = await fetch(`${DATA_URL}${cacheBust}`, { cache: force ? 'no-store' : 'default' });
+    const response = await fetch(`${DATA_URL}?t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache' }
+    });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     if (force) {
@@ -307,21 +309,27 @@ async function hardRefreshApp() {
   try {
     lastRefreshCheck = nowText();
     localStorage.setItem('lastRefreshCheck', lastRefreshCheck);
-    if ('serviceWorker' in navigator) {
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map(registration => registration.unregister()));
-    }
+
     if ('caches' in window) {
       const keys = await caches.keys();
       await Promise.all(keys.map(key => caches.delete(key)));
     }
-    const url = new URL(window.location.origin + window.location.pathname);
+
+    if ('serviceWorker' in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map(async registration => {
+        try { await registration.update(); } catch (_) {}
+        await registration.unregister();
+      }));
+    }
+
+    const url = new URL(window.location.href);
     url.searchParams.set('refresh', Date.now().toString());
     window.location.replace(url.toString());
   } catch (error) {
     console.error(error);
-    setStatus('Не удалось полностью обновить приложение. Попробуй ещё раз.');
-    refreshButton.disabled = false;
+    setStatus('Не удалось полностью обновить приложение. Пробую обновить данные напрямую…');
+    await loadMenu({ force: true });
   }
 }
 
@@ -342,10 +350,10 @@ refreshButton.addEventListener('click', hardRefreshApp);
 if ('serviceWorker' in navigator) window.addEventListener('load', () => serviceWorkerRegistration());
 async function serviceWorkerRegistration() {
   try {
-    await navigator.serviceWorker.register('service-worker.js?v=17', { updateViaCache: 'none' });
+    await navigator.serviceWorker.register('service-worker.js?v=24', { updateViaCache: 'none' });
   } catch (error) {
     console.error('Service worker registration failed', error);
   }
 }
 
-loadMenu();
+loadMenu({ force: new URLSearchParams(window.location.search).has('refresh') });
