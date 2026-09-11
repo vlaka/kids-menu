@@ -14,7 +14,7 @@ const homeButton = document.getElementById('homeButton');
 
 const DATA_URL = 'data/menu.json';
 let currentData = null;
-let activeCategory = 'all';
+let activeCategory = 'home';
 
 function setStatus(message) {
   statusEl.textContent = message;
@@ -96,8 +96,8 @@ function renderTabs(categories) {
   categoryNav.replaceChildren();
 
   const tabs = [
-    { id: 'all', name: 'Все', icon: '🏠' },
-    ...categories.map(category => ({ id: category.id, name: category.name, icon: category.icon }))
+    ...categories.map(category => ({ id: category.id, name: category.name, icon: category.icon })),
+    { id: 'all', name: 'Показать всё', icon: '📋' }
   ];
 
   for (const tab of tabs) {
@@ -121,11 +121,13 @@ function renderMenu(data) {
   renderHome(categories);
   menuEl.replaceChildren();
 
-  const onHome = activeCategory === 'all';
+  const onHome = activeCategory === 'home';
   homeView.hidden = !onHome;
   menuEl.hidden = onHome;
 
-  if (!onHome) {
+  if (activeCategory === 'all') {
+    for (const category of categories) renderCategory(category);
+  } else if (!onHome) {
     const selected = categories.find(category => category.id === activeCategory);
     if (selected) renderCategory(selected);
   }
@@ -162,7 +164,7 @@ async function loadMenu({ force = false } = {}) {
   }
 }
 
-homeButton.addEventListener('click', () => selectCategory('all'));
+homeButton.addEventListener('click', () => selectCategory('home'));
 settingsButton.addEventListener('click', () => settingsDialog.showModal());
 closeSettingsButton.addEventListener('click', () => settingsDialog.close());
 settingsDialog.addEventListener('click', event => {
