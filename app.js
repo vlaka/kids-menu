@@ -8,8 +8,11 @@ const lastUpdatedEl = document.getElementById('lastUpdated');
 const categoryNav = document.getElementById('categoryNav');
 const categoryTemplate = document.getElementById('categoryTemplate');
 const dishTemplate = document.getElementById('dishTemplate');
+const homeButton = document.getElementById('homeButton');
 
 const DATA_URL = 'data/menu.json';
+let currentData = null;
+let activeCategory = 'all';
 
 function setStatus(message) {
   statusEl.textContent = message;
@@ -37,59 +40,82 @@ function buildDishCard(dish) {
   return dishNode;
 }
 
-function renderMenu(data) {
-  menuEl.replaceChildren();
-  categoryNav.replaceChildren();
+function renderCategory(category) {
+  const categoryNode = categoryTemplate.content.cloneNode(true);
+  categoryNode.querySelector('.category-icon').textContent = category.icon ?? '🍽️';
+  categoryNode.querySelector('.category-title').textContent = category.name;
+  const grid = categoryNode.querySelector('.dish-grid');
 
-  const categories = data.categories ?? [];
+  const items = category.items ?? [];
+  let index = 0;
 
-  for (const category of categories) {
-    const sectionId = `category-${category.id}`;
+  while (index < items.length) {
+    const dish = items[index];
 
-    const navButton = document.createElement('button');
-    navButton.type = 'button';
-    navButton.className = 'category-chip';
-    navButton.textContent = `${category.icon ?? '🍽️'} ${category.name}`;
-    navButton.addEventListener('click', () => {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    categoryNav.appendChild(navButton);
-
-    const categoryNode = categoryTemplate.content.cloneNode(true);
-    const section = categoryNode.querySelector('.category-section');
-    section.id = sectionId;
-    categoryNode.querySelector('.category-icon').textContent = category.icon ?? '🍽️';
-    categoryNode.querySelector('.category-title').textContent = category.name;
-    const grid = categoryNode.querySelector('.dish-grid');
-
-    const items = category.items ?? [];
-    let index = 0;
-
-    while (index < items.length) {
-      const dish = items[index];
-
-      if (!dish.group) {
-        grid.appendChild(buildDishCard(dish));
-        index += 1;
-        continue;
-      }
-
-      const family = document.createElement('div');
-      family.className = 'dish-family';
-      family.dataset.group = dish.group;
-
-      while (index < items.length && items[index].group === dish.group) {
-        family.appendChild(buildDishCard(items[index]));
-        index += 1;
-      }
-
-      grid.appendChild(family);
+    if (!dish.group) {
+      grid.appendChild(buildDishCard(dish));
+      index += 1;
+      continue;
     }
 
-    menuEl.appendChild(categoryNode);
+    const family = document.createElement('div');
+    family.className = 'dish-family';
+    family.dataset.group = dish.group;
+
+    while (index < items.length && items[index].group === dish.group) {
+      family.appendChild(buildDishCard(items[index]));
+      index += 1;
+    }
+
+    grid.appendChild(family);
+  }
+
+  menuEl.appendChild(categoryNode);
+}
+
+function renderTabs(categories) {
+  categoryNav.replaceChildren();
+
+  const tabs = [
+    { id: 'all', name: 'Все', icon: '🏠' },
+    ...categories.map(category => ({ id: category.id, name: category.name, icon: category.icon }))
+  ];
+
+  for (const tab of tabs) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'category-chip';
+    button.dataset.category = tab.id;
+    button.textContent = `${tab.icon ?? '🍽️'} ${tab.name}`;
+    button.classList.toggle('active', tab.id === activeCategory);
+    button.setAttribute('aria-pressed', tab.id === activeCategory ? 'true' : 'false');
+    button.addEventListener('click', () => selectCategory(tab.id));
+    categoryNav.appendChild(button);
+  }
+}
+
+function renderMenu(data) {
+  currentData = data;
+  menuEl.replaceChildren();
+
+  const categories = data.categories ?? [];
+  renderTabs(categories);
+
+  const visibleCategories = activeCategory === 'all'
+    ? categories
+    : categories.filter(category => category.id === activeCategory);
+
+  for (const category of visibleCategories) {
+    renderCategory(category);
   }
 
   lastUpdatedEl.textContent = `Последнее обновление: ${data.updatedAt ?? 'неизвестно'}${data.menuVersion ? ` · меню ${data.menuVersion}` : ''}`;
+}
+
+function selectCategory(categoryId) {
+  activeCategory = categoryId;
+  if (currentData) renderMenu(currentData);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 async function loadMenu({ force = false } = {}) {
@@ -115,6 +141,7 @@ async function loadMenu({ force = false } = {}) {
   }
 }
 
+homeButton.addEventListener('click', () => selectCategory('all'));
 settingsButton.addEventListener('click', () => settingsDialog.showModal());
 closeSettingsButton.addEventListener('click', () => settingsDialog.close());
 settingsDialog.addEventListener('click', event => {
@@ -127,7 +154,15 @@ refreshButton.addEventListener('click', async () => {
 });
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js'));
+  window.addEventListener('load', () => serviceWorkerRegistration());
+}
+
+async function serviceWorkerRegistration() {
+  try {
+    await navigator.serviceWorker.register('service-worker.js');
+  } catch (error) {
+    console.error('Service worker registration failed', error);
+  }
 }
 
 loadMenu();
