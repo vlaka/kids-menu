@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fff7ed" />
   <meta name="description" content="Личный ресторан Арианы и Алисы" />
-  <link rel="manifest" href="manifest.webmanifest?v=15" />
-  <link rel="stylesheet" href="styles.css?v=15" />
+  <link rel="manifest" href="manifest.webmanifest?v=17" />
+  <link rel="stylesheet" href="styles.css?v=17" />
   <title>Личный ресторан Арианы и Алисы</title>
 </head>
 <body>
@@ -32,6 +32,20 @@
 
   <nav id="categoryNav" class="bottom-nav" aria-label="Категории меню"></nav>
 
+  <dialog id="dishDialog" class="dish-dialog">
+    <div class="dish-dialog-shell">
+      <button id="closeDishButton" class="dish-dialog-close" type="button" aria-label="Закрыть">✕</button>
+      <div class="dish-dialog-media">
+        <img id="dishDialogImage" class="dish-dialog-image" alt="" hidden />
+        <div id="dishDialogPlaceholder" class="dish-dialog-placeholder" aria-hidden="true">🍽️</div>
+      </div>
+      <div class="dish-dialog-content">
+        <h2 id="dishDialogTitle"></h2>
+        <p id="dishDialogDescription"></p>
+      </div>
+    </div>
+  </dialog>
+
   <dialog id="settingsDialog" class="settings-dialog">
     <div class="settings-header">
       <h2>Настройки</h2>
@@ -54,7 +68,7 @@
   </template>
 
   <template id="dishTemplate">
-    <article class="dish-card">
+    <article class="dish-card" tabindex="0" role="button">
       <div class="dish-photo-wrap">
         <img class="dish-photo" alt="" loading="lazy" hidden />
         <div class="dish-placeholder" aria-hidden="true">🍽️</div>
@@ -62,10 +76,11 @@
       <div class="dish-content">
         <h3 class="dish-name"></h3>
         <p class="dish-description"></p>
+        <button class="order-button" type="button"></button>
       </div>
     </article>
   </template>
 
-  <script src="app.js?v=15" defer></script>
+  <script src="app.js?v=17" defer></script>
 </body>
 </html>
