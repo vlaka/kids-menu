@@ -20,6 +20,13 @@ function setStatus(message) {
   statusEl.textContent = message;
 }
 
+function categoryIconMarkup(category, size = 32) {
+  if (category.iconImage) {
+    return `<img src="${category.iconImage}" alt="" width="${size}" height="${size}" style="width:${size}px;height:${size}px;object-fit:cover;border-radius:22%;display:block" />`;
+  }
+  return category.icon ?? '🍽️';
+}
+
 function buildDishCard(dish) {
   const dishNode = dishTemplate.content.cloneNode(true);
   const card = dishNode.querySelector('.dish-card');
@@ -44,7 +51,7 @@ function buildDishCard(dish) {
 
 function renderCategory(category) {
   const categoryNode = categoryTemplate.content.cloneNode(true);
-  categoryNode.querySelector('.category-icon').textContent = category.icon ?? '🍽️';
+  categoryNode.querySelector('.category-icon').innerHTML = categoryIconMarkup(category, 32);
   categoryNode.querySelector('.category-title').textContent = category.name;
   const grid = categoryNode.querySelector('.dish-grid');
 
@@ -83,7 +90,7 @@ function renderHome(categories) {
     button.type = 'button';
     button.className = 'category-card';
     button.innerHTML = `
-      <span class="category-card-icon">${category.icon ?? '🍽️'}</span>
+      <span class="category-card-icon">${categoryIconMarkup(category, 64)}</span>
       <span class="category-card-name">${category.name}</span>
       <span class="category-card-count">${category.items?.length ?? 0} блюд</span>
     `;
@@ -96,7 +103,7 @@ function renderTabs(categories) {
   categoryNav.replaceChildren();
 
   const tabs = [
-    ...categories.map(category => ({ id: category.id, name: category.name, icon: category.icon })),
+    ...categories.map(category => ({ id: category.id, name: category.name, icon: category.icon, iconImage: category.iconImage })),
     { id: 'all', name: 'Показать всё', icon: '📋' }
   ];
 
@@ -105,7 +112,7 @@ function renderTabs(categories) {
     button.type = 'button';
     button.className = 'bottom-nav-item';
     button.dataset.category = tab.id;
-    button.innerHTML = `<span>${tab.icon ?? '🍽️'}</span><small>${tab.name}</small>`;
+    button.innerHTML = `<span>${categoryIconMarkup(tab, 24)}</span><small>${tab.name}</small>`;
     button.classList.toggle('active', tab.id === activeCategory);
     button.setAttribute('aria-pressed', tab.id === activeCategory ? 'true' : 'false');
     button.addEventListener('click', () => selectCategory(tab.id));
