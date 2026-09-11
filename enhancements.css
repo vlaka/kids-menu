@@ -8,6 +8,23 @@
   position: relative;
 }
 
+#homeButton.back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+  line-height: 1;
+}
+
+#homeButton.back-button::before {
+  content: '←';
+  display: block;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
 .header-order-count {
   position: absolute;
   top: -5px;
