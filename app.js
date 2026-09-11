@@ -18,7 +18,7 @@ const DISH_IMAGE_OVERRIDES = {
 };
 let currentData = null;
 let activeCategory = 'home';
-let lastRefreshCheck = null;
+let lastRefreshCheck = localStorage.getItem('lastRefreshCheck');
 
 function setStatus(message) {
   statusEl.textContent = message;
@@ -198,7 +198,10 @@ async function loadMenu({ force = false } = {}) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const data = await response.json();
-    if (force) lastRefreshCheck = nowText();
+    if (force) {
+      lastRefreshCheck = nowText();
+      localStorage.setItem('lastRefreshCheck', lastRefreshCheck);
+    }
     renderMenu(data);
     setStatus(force ? 'Меню проверено и обновлено.' : '');
   } catch (error) {
@@ -211,14 +214,15 @@ async function loadMenu({ force = false } = {}) {
 
 async function hardRefreshApp() {
   refreshButton.disabled = true;
-  setStatus('Проверяю новую версию приложения…');
+  setStatus('Полностью обновляю приложение…');
 
   try {
+    lastRefreshCheck = nowText();
+    localStorage.setItem('lastRefreshCheck', lastRefreshCheck);
+
     if ('serviceWorker' in navigator) {
-      const registration = await navigator.serviceWorker.getRegistration();
-      if (registration) {
-        await registration.update();
-      }
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map(registration => registration.unregister()));
     }
 
     if ('caches' in window) {
@@ -226,7 +230,7 @@ async function hardRefreshApp() {
       await Promise.all(keys.map(key => caches.delete(key)));
     }
 
-    const url = new URL(window.location.href);
+    const url = new URL(window.location.origin + window.location.pathname);
     url.searchParams.set('refresh', Date.now().toString());
     window.location.replace(url.toString());
   } catch (error) {
@@ -252,7 +256,7 @@ if ('serviceWorker' in navigator) {
 
 async function serviceWorkerRegistration() {
   try {
-    await navigator.serviceWorker.register('service-worker.js');
+    await navigator.serviceWorker.register('service-worker.js?v=15', { updateViaCache: 'none' });
   } catch (error) {
     console.error('Service worker registration failed', error);
   }
