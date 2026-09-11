@@ -1,12 +1,12 @@
-const CACHE_NAME = 'kids-menu-v23';
+const CACHE_NAME = 'kids-menu-v24';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=18',
-  './enhancements.css?v=18',
-  './app.js?v=18',
-  './enhancements.js?v=18',
-  './manifest.webmanifest?v=18',
+  './styles.css?v=24',
+  './enhancements.css?v=24',
+  './app.js?v=24',
+  './enhancements.js?v=24',
+  './manifest.webmanifest?v=24',
   './data/menu.json',
   './assets/schnitzel-icon.svg',
   './assets/dishes/banana-20260912-0115.avif',
@@ -29,6 +29,22 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
+  const requestUrl = new URL(event.request.url);
+  const isMenuData = requestUrl.pathname.endsWith('/data/menu.json');
+
+  if (isMenuData) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put('./data/menu.json', copy));
+          return response;
+        })
+        .catch(() => caches.match('./data/menu.json'))
+    );
+    return;
+  }
 
   event.respondWith(
     fetch(event.request)
