@@ -15,7 +15,7 @@
       <p class="eyebrow">Наш ресторан</p>
       <h1>Личный ресторан Арианы и Алисы</h1>
     </div>
-    <button id="refreshButton" class="refresh-button" type="button">↻ Обновить</button>
+    <button id="settingsButton" class="icon-button" type="button" aria-label="Настройки" aria-haspopup="dialog">⚙️</button>
   </header>
 
   <main class="page">
@@ -31,6 +31,17 @@
     <section id="status" class="status" aria-live="polite"></section>
     <section id="menu" class="menu-sections" aria-label="Меню ресторана"></section>
   </main>
+
+  <dialog id="settingsDialog" class="settings-dialog">
+    <div class="settings-header">
+      <h2>Настройки</h2>
+      <button id="closeSettingsButton" class="icon-button small" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="settings-body">
+      <button id="refreshButton" class="settings-action" type="button">↻ Обновить меню</button>
+      <p id="lastUpdated" class="settings-note">Последнее обновление: неизвестно</p>
+    </div>
+  </dialog>
 
   <template id="categoryTemplate">
     <section class="category-section">
