@@ -20,18 +20,17 @@
   </header>
 
   <main class="page">
-    <section class="hero">
-      <div>
-        <p class="hero-kicker">Сегодня в меню</p>
-        <h2>Выбирайте, что приготовить 🍽️</h2>
-        <p class="hero-text">Все блюда нашего домашнего ресторана собраны здесь.</p>
-      </div>
-    </section>
-
-    <nav id="categoryNav" class="category-nav" aria-label="Категории меню"></nav>
     <section id="status" class="status" aria-live="polite"></section>
-    <section id="menu" class="menu-sections" aria-label="Меню ресторана"></section>
+    <section id="homeView" class="home-view" aria-label="Категории меню">
+      <div class="home-heading">
+        <h2>Категории</h2>
+      </div>
+      <div id="categoryCards" class="category-card-grid"></div>
+    </section>
+    <section id="menu" class="menu-sections" aria-label="Меню ресторана" hidden></section>
   </main>
+
+  <nav id="categoryNav" class="bottom-nav" aria-label="Категории меню"></nav>
 
   <dialog id="settingsDialog" class="settings-dialog">
     <div class="settings-header">
