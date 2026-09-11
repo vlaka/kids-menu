@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fff7ed" />
   <meta name="description" content="Личный ресторан Арианы и Алисы" />
-  <link rel="manifest" href="manifest.webmanifest?v=17" />
-  <link rel="stylesheet" href="styles.css?v=17" />
+  <link rel="manifest" href="manifest.webmanifest?v=18" />
+  <link rel="stylesheet" href="styles.css?v=18" />
   <title>Личный ресторан Арианы и Алисы</title>
 </head>
 <body>
@@ -16,7 +16,13 @@
       <p class="eyebrow">Наш ресторан</p>
       <h1>Личный ресторан Арианы и Алисы</h1>
     </div>
-    <button id="settingsButton" class="icon-button" type="button" aria-label="Настройки" aria-haspopup="dialog">⚙️</button>
+    <div class="header-actions">
+      <button id="topOrderButton" class="icon-button order-header-button" type="button" aria-label="Мой заказ">
+        <span aria-hidden="true">🧾</span>
+        <b id="topOrderCount" class="header-order-count" hidden>0</b>
+      </button>
+      <button id="settingsButton" class="icon-button" type="button" aria-label="Настройки" aria-haspopup="dialog">⚙️</button>
+    </div>
   </header>
 
   <main class="page">
@@ -81,6 +87,6 @@
     </article>
   </template>
 
-  <script src="app.js?v=17" defer></script>
+  <script src="app.js?v=18" defer></script>
 </body>
 </html>
