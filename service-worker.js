@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v59';
+const CACHE_NAME = 'kids-menu-v60';
 const APP_SHELL = [
   './',
   './index.html',
@@ -15,20 +15,20 @@ const APP_SHELL = [
   './assets/dishes/banana-v2.avif',
   './assets/dishes/black-bread-v3.avif',
   './assets/dishes/boiled-egg-v2.avif',
-  './assets/dishes/bun-v2.avif',
-  './assets/dishes/chocolate-yogurt-v2.avif',
-  './assets/dishes/cookie-v2.avif',
-  './assets/dishes/grape-juice-v2.avif',
-  './assets/dishes/hot-dog-v2.avif',
+  './assets/dishes/bun-v3.avif',
+  './assets/dishes/chocolate-yogurt-v3.avif',
+  './assets/dishes/cookie-v3.avif',
+  './assets/dishes/grape-juice-v3.avif',
+  './assets/dishes/hot-dog-v3.avif',
   './assets/dishes/ketchup-mayo-v5.avif',
   './assets/dishes/lollipop-v2.avif',
-  './assets/dishes/marshmallow-v2.avif',
+  './assets/dishes/marshmallow-v3.avif',
   './assets/dishes/nutella-bread-v2.avif',
-  './assets/dishes/pancakes-v2.avif',
-  './assets/dishes/plain-sausage-v2.avif',
-  './assets/dishes/sausage-v2.avif',
+  './assets/dishes/pancakes-v3.avif',
+  './assets/dishes/plain-sausage-v3.avif',
+  './assets/dishes/sausage-v3.avif',
   './assets/dishes/schnitzel-sticks-v3.avif',
-  './assets/dishes/water-v2.avif'
+  './assets/dishes/water-v3.avif'
 ];
 
 self.addEventListener('install', event => {
