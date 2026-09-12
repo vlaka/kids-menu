@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v40';
+const CACHE_NAME = 'kids-menu-v41';
 const APP_SHELL = [
   './',
   './index.html',
@@ -14,7 +14,8 @@ const APP_SHELL = [
   './assets/dishes/banana-1200-q80.avif',
   './assets/dishes/black-bread-1200-q80-v2.avif',
   './assets/dishes/lollipop-20260912-0326.avif',
-  './assets/dishes/pancakes-20260912-0429.avif'
+  './assets/dishes/pancakes-20260912-0429.avif',
+  './assets/dishes/water-1200-q80.avif'
 ];
 
 self.addEventListener('install', event => {
