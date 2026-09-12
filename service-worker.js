@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v38';
+const CACHE_NAME = 'kids-menu-v39';
 const APP_SHELL = [
   './',
   './index.html',
@@ -12,7 +12,7 @@ const APP_SHELL = [
   './data/menu.json',
   './assets/schnitzel-icon.svg',
   './assets/dishes/banana-1200-q80.avif',
-  './assets/dishes/black-bread-1200-q80.avif',
+  './assets/dishes/black-bread-1200-q80-v2.avif',
   './assets/dishes/lollipop-20260912-0326.avif',
   './assets/dishes/pancakes-20260912-0429.avif'
 ];
