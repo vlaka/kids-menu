@@ -64,7 +64,7 @@ function formatDishCount(count) {
 
 function syncHeaderNavigation() {
   const onHome = activeCategory === 'home';
-  homeButton.textContent = onHome ? '🏠' : '⬅︎';
+  homeButton.textContent = onHome ? '🏠' : '⬅️';
   homeButton.setAttribute('aria-label', onHome ? 'Главная' : 'Назад');
   homeButton.title = onHome ? 'Главная' : 'Назад';
 }
@@ -400,7 +400,7 @@ if (!history.state?.view) {
 if ('serviceWorker' in navigator) window.addEventListener('load', () => serviceWorkerRegistration());
 async function serviceWorkerRegistration() {
   try {
-    await navigator.serviceWorker.register('service-worker.js?v=48', { updateViaCache: 'none' });
+    await navigator.serviceWorker.register('service-worker.js?v=50', { updateViaCache: 'none' });
   } catch (error) {
     console.error('Service worker registration failed', error);
   }
