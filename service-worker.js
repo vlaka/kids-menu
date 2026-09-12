@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v63';
+const CACHE_NAME = 'kids-menu-v64';
 const APP_SHELL = [
   './',
   './index.html',
@@ -16,15 +16,15 @@ const APP_SHELL = [
   './assets/dishes/black-bread-v3.avif',
   './assets/dishes/boiled-egg-v2.avif',
   './assets/dishes/bun-v4.avif',
-  './assets/dishes/chocolate-yogurt-v3.avif',
-  './assets/dishes/cookie-v3.avif',
+  './assets/dishes/chocolate-yogurt-v4.avif',
+  './assets/dishes/cookie-v4.avif',
   './assets/dishes/grape-juice-v3.avif',
   './assets/dishes/hot-dog-v4.avif',
   './assets/dishes/ketchup-mayo-v5.avif',
   './assets/dishes/lollipop-v2.avif',
   './assets/dishes/marshmallow-v4.avif',
   './assets/dishes/nutella-bread-v3.avif',
-  './assets/dishes/pancakes-v3.avif',
+  './assets/dishes/pancakes-v4.avif',
   './assets/dishes/plain-sausage-v4.avif',
   './assets/dishes/sausage-v4.avif',
   './assets/dishes/schnitzel-sticks-v3.avif',
