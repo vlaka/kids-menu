@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v48';
+const CACHE_NAME = 'kids-menu-v49';
 const APP_SHELL = [
   './',
   './index.html',
@@ -12,18 +12,18 @@ const APP_SHELL = [
   './data/menu.json',
   './assets/schnitzel-icon.svg',
   './assets/dishes/apple-juice-1200-q80.avif',
-  './assets/dishes/banana-1200-q80.avif',
-  './assets/dishes/black-bread-1200-q80-v2.avif',
-  './assets/dishes/bun-1200-q80.avif',
-  './assets/dishes/chocolate-yogurt-1200-q80.avif',
-  './assets/dishes/cookie-1200-q80.avif',
+  './assets/dishes/banana-clean.avif',
+  './assets/dishes/black-bread-clean.avif',
+  './assets/dishes/bun-clean.avif',
+  './assets/dishes/chocolate-yogurt-clean.avif',
+  './assets/dishes/cookie-clean.avif',
   './assets/dishes/grape-juice-1200-q80.avif',
-  './assets/dishes/hot-dog-1200-q80.avif',
-  './assets/dishes/lollipop-20260912-0326.avif',
-  './assets/dishes/marshmallow-1200-q80.avif',
-  './assets/dishes/pancakes-20260912-0429.avif',
-  './assets/dishes/plain-sausage-1200-q80.avif',
-  './assets/dishes/sausage-1200-q80.avif',
+  './assets/dishes/hot-dog-clean.avif',
+  './assets/dishes/lollipop-clean.avif',
+  './assets/dishes/marshmallow-clean.avif',
+  './assets/dishes/pancakes-clean.avif',
+  './assets/dishes/plain-sausage-clean.avif',
+  './assets/dishes/sausage-clean.avif',
   './assets/dishes/water-1200-q80.avif'
 ];
 
