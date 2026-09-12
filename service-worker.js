@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v52';
+const CACHE_NAME = 'kids-menu-v53';
 const APP_SHELL = [
   './',
   './index.html',
@@ -11,7 +11,7 @@ const APP_SHELL = [
   './assets/icons/app-icon-192.png?v=42',
   './data/menu.json',
   './assets/schnitzel-icon.svg',
-  './assets/dishes/apple-juice-1200-q80.avif',
+  './assets/dishes/apple-juice-1200-q80-1.avif',
   './assets/dishes/banana-clean.avif',
   './assets/dishes/black-bread-clean.avif',
   './assets/dishes/boiled-egg-shadow-corrected.avif',
@@ -26,7 +26,7 @@ const APP_SHELL = [
   './assets/dishes/pancakes-clean.avif',
   './assets/dishes/plain-sausage-clean.avif',
   './assets/dishes/sausage-clean.avif',
-  './assets/dishes/schnitzel-sticks-clean.avif',
+  './assets/dishes/schnitzel-sticks-clean-1.avif',
   './assets/dishes/water-1200-q80.avif'
 ];
 
