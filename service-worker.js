@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-menu-v49';
+const CACHE_NAME = 'kids-menu-v50';
 const APP_SHELL = [
   './',
   './index.html',
