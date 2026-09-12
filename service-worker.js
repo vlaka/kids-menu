@@ -1,14 +1,14 @@
-const CACHE_NAME = 'kids-menu-v32';
+const CACHE_NAME = 'kids-menu-v33';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=32',
-  './enhancements.css?v=32',
-  './app.js?v=32',
-  './enhancements.js?v=32',
-  './manifest.webmanifest?v=32',
-  './assets/icons/app-icon-64.png?v=32',
-  './assets/icons/app-icon-192.png?v=32',
+  './styles.css?v=33',
+  './enhancements.css?v=33',
+  './app.js?v=33',
+  './enhancements.js?v=33',
+  './manifest.webmanifest?v=33',
+  './assets/icons/app-icon-64.png?v=33',
+  './assets/icons/app-icon-192.png?v=33',
   './data/menu.json',
   './assets/schnitzel-icon.svg',
   './assets/dishes/banana-20260912-0115.avif',
