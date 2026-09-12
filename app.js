@@ -49,6 +49,19 @@ function categoryIconMarkup(category, size = 32) {
   return category.icon ?? '🍽️';
 }
 
+function formatDishCount(count) {
+  const mod100 = count % 100;
+  const mod10 = count % 10;
+  let word = 'блюд';
+
+  if (mod100 < 11 || mod100 > 14) {
+    if (mod10 === 1) word = 'блюдо';
+    else if (mod10 >= 2 && mod10 <= 4) word = 'блюда';
+  }
+
+  return `${count} ${word}`;
+}
+
 function syncHeaderNavigation() {
   const onHome = activeCategory === 'home';
   homeButton.textContent = onHome ? '🏠' : '⬅︎';
@@ -217,7 +230,8 @@ function renderHome(categories) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'category-card';
-    button.innerHTML = `<span class="category-card-icon">${categoryIconMarkup(category, 64)}</span><span class="category-card-name">${category.name}</span><span class="category-card-count">${category.items?.length ?? 0} блюд</span>`;
+    const count = category.items?.length ?? 0;
+    button.innerHTML = `<span class="category-card-icon">${categoryIconMarkup(category, 64)}</span><span class="category-card-name">${category.name}</span><span class="category-card-count">${formatDishCount(count)}</span>`;
     button.addEventListener('click', () => selectCategory(category.id));
     categoryCardsEl.appendChild(button);
   }
@@ -394,7 +408,7 @@ if (!history.state?.view) {
 if ('serviceWorker' in navigator) window.addEventListener('load', () => serviceWorkerRegistration());
 async function serviceWorkerRegistration() {
   try {
-    await navigator.serviceWorker.register('service-worker.js?v=33', { updateViaCache: 'none' });
+    await navigator.serviceWorker.register('service-worker.js?v=40', { updateViaCache: 'none' });
   } catch (error) {
     console.error('Service worker registration failed', error);
   }
