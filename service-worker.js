@@ -12,7 +12,8 @@ const APP_SHELL = [
   './data/menu.json',
   './assets/schnitzel-icon.svg',
   './assets/dishes/banana-20260912-0115.avif',
-  './assets/dishes/black-bread-20260912-0115.avif'
+  './assets/dishes/black-bread-20260912-0115.avif',
+  './assets/dishes/lollipop-20260912-0235.avif'
 ];
 
 self.addEventListener('install', event => {
