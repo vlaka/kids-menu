@@ -54,6 +54,34 @@ function applyTheme(theme, { save = false } = {}) {
   for (const input of themeInputs) input.checked = input.value === theme;
 }
 
+function swipeTabs() {
+  if (!currentData || typeof activeCategory === 'undefined') return [];
+  return [
+    'home',
+    'order',
+    ...(currentData.categories ?? []).map(category => category.id),
+    'all'
+  ];
+}
+
+function scrollActiveTabIntoView() {
+  requestAnimationFrame(() => {
+    const active = document.querySelector('.bottom-nav-item.active');
+    active?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+}
+
+function moveBySwipe(direction) {
+  if (typeof selectCategory !== 'function') return;
+  const tabs = swipeTabs();
+  const currentIndex = tabs.indexOf(activeCategory);
+  if (currentIndex < 0) return;
+  const nextIndex = currentIndex + direction;
+  if (nextIndex < 0 || nextIndex >= tabs.length) return;
+  selectCategory(tabs[nextIndex]);
+  scrollActiveTabIntoView();
+}
+
 if (topOrderButton) {
   topOrderButton.addEventListener('click', () => {
     if (typeof selectCategory === 'function') selectCategory('order');
@@ -96,19 +124,42 @@ systemTheme.addEventListener('change', () => {
   if (getSavedTheme() === 'system') applyTheme('system');
 });
 
+let swipeStartX = 0;
+let swipeStartY = 0;
+let swipeTracking = false;
+
+document.addEventListener('touchstart', event => {
+  if (event.touches.length !== 1) return;
+  if (dishPopup?.open || settingsDialog?.open) return;
+  if (event.target.closest('.bottom-nav, dialog')) return;
+  const touch = event.touches[0];
+  swipeStartX = touch.clientX;
+  swipeStartY = touch.clientY;
+  swipeTracking = true;
+}, { passive: true });
+
+document.addEventListener('touchend', event => {
+  if (!swipeTracking || event.changedTouches.length !== 1) return;
+  swipeTracking = false;
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - swipeStartX;
+  const dy = touch.clientY - swipeStartY;
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+  if (absX < 70 || absX < absY * 1.4) return;
+  moveBySwipe(dx < 0 ? 1 : -1);
+}, { passive: true });
+
 const orderObserver = new MutationObserver(() => {
   syncTopOrderCount();
   syncHeaderBackButton();
   syncDishPopupOrderButton();
 });
 orderObserver.observe(document.getElementById('categoryNav'), { childList: true, subtree: true, characterData: true });
-window.addEventListener('load', async () => {
+window.addEventListener('load', () => {
   syncTopOrderCount();
   syncHeaderBackButton();
   syncDishPopupOrderButton();
-  if ('serviceWorker' in navigator) {
-    try { await navigator.serviceWorker.register('service-worker.js?v=30', { updateViaCache: 'none' }); } catch (error) { console.error(error); }
-  }
 });
 
 applyTheme(getSavedTheme());
