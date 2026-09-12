@@ -69,14 +69,6 @@ function syncHeaderNavigation() {
   homeButton.title = onHome ? 'Главная' : 'Назад';
 }
 
-function findDish(dishId) {
-  for (const category of currentData?.categories ?? []) {
-    const dish = (category.items ?? []).find(item => item.id === dishId);
-    if (dish) return dish;
-  }
-  return null;
-}
-
 function openDishDialog(dish) {
   dishDialogTitle.textContent = dish.name ?? '';
   dishDialogDescription.textContent = dish.description ?? '';
@@ -408,7 +400,7 @@ if (!history.state?.view) {
 if ('serviceWorker' in navigator) window.addEventListener('load', () => serviceWorkerRegistration());
 async function serviceWorkerRegistration() {
   try {
-    await navigator.serviceWorker.register('service-worker.js?v=40', { updateViaCache: 'none' });
+    await navigator.serviceWorker.register('service-worker.js?v=48', { updateViaCache: 'none' });
   } catch (error) {
     console.error('Service worker registration failed', error);
   }
